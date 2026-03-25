@@ -1,5 +1,8 @@
 <% layout("/layouts/boilerplate") %>
-<div class="row mt-3">
+
+<link rel="stylesheet" href="css/style.css">
+
+<div class="row mt-1">
     <div class="col-8 offset-2">
         <body>
             <br><br>
@@ -12,10 +15,48 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="description class="form-label">Description</label>
+                    <label for="description" class="form-label">Description</label>
                     <textarea name="listing[description]" class="form-control" required></textarea>
                     <div class="invalid-feedback">Please enter a short description</div>
                 </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <div class="category-box">
+                        <div class="d-flex gap-2">
+
+                        <input type="radio" class="btn-check" name="listing[category]" id="rooms" value="rooms" required>
+                        <label class="btn category-btn" for="rooms">Rooms</label>
+
+                        <input type="radio" class="btn-check" name="listing[category]" id="cities" value="cities">
+                        <label class="btn category-btn" for="cities">Cities</label>
+
+                        <input type="radio" class="btn-check" name="listing[category]" id="mountains" value="mountains">
+                        <label class="btn category-btn" for="mountains">Mountains</label>
+
+                        <input type="radio" class="btn-check" name="listing[category]" id="castles" value="castles">
+                        <label class="btn category-btn" for="castles">Castles</label>
+
+                        <input type="radio" class="btn-check" name="listing[category]" id="pools" value="pools">
+                        <label class="btn category-btn" for="pools">Pools</label>
+
+                        <input type="radio" class="btn-check" name="listing[category]" id="camping" value="camping">
+                        <label class="btn category-btn" for="camping">Camping</label>
+
+                        <input type="radio" class="btn-check" name="listing[category]" id="farms" value="farms">
+                        <label class="btn category-btn" for="farms">Farms</label>
+
+                        <input type="radio" class="btn-check" name="listing[category]" id="arctic" value="arctic">
+                        <label class="btn category-btn" for="arctic">Arctic</label>
+
+                        <input type="radio" class="btn-check" name="listing[category]" id="luxury" value="luxury">
+                        <label class="btn category-btn" for="luxury">Luxury</label>
+
+                        </div>
+                    </div>
+                    <div class="invalid-feedback">Please select a category</div>
+                </div>
+
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image</label>
@@ -42,7 +83,7 @@
                     <div class="invalid-feedback">Location should be valid</div>
                 </div>
 
-                <button class="btn btn-dark add-btn mt-3 mb-3">Add</button>
+                <button class="btn btn-dark add-btn mt-3 mb-4">Add</button>
             </form>
         </body>
     </div>

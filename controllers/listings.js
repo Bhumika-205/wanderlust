@@ -5,8 +5,29 @@ maptiler.config.apiKey = process.env.MAP_API_KEY;
 
 // Index route
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
+    let { search, category } = req.query;
+
+    let query = {};
+
+    if (search) {
+        query.$or = [
+            { title: { $regex: search, $options: "i" } },
+            { location: { $regex: search, $options: "i" } },
+            { country: { $regex: search, $options: "i" } }
+        ];
+    }
+
+    if (category) {
+        query.category = category;
+    }
+
+    const allListings = await Listing.find(query);
+
+    res.render("listings/index.ejs", {
+        allListings,
+        search: search || "",
+        category: category || ""
+    });
 };
 
 // new

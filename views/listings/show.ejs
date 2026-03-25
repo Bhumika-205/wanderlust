@@ -1,4 +1,6 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="css/style.css">
+
 <script>
     const mapApi = "<%= process.env.MAP_API_KEY %>";
     const listing = <%- JSON.stringify(listing) %>;
@@ -10,10 +12,14 @@
     </div>
 
         <div class="card col-8 offset-2 show-card listing-card">
-            <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
+            <img src="<%= listing.image.url %>" class="card-img-top show-img position-relative" alt="listing_image">
+            <span class="position-absolute top-0 start-0 m-3 badge">
+                <%= listing.category %>
+            </span>
+
             <div class="card-body">
                 <p class="card-text">Owned by <i><%= listing.owner ? listing.owner.username : "Unknown" %></i></p>
-                    
+
                     <p class="card-text"><%= listing.description %></p>
                     <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %> </p>
                     <p class="card-text"><%= listing.location %></p>

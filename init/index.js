@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
-require("dotenv").config();
+require("dotenv").config({ path: "../.env" });
 const MONGO_URL = process.env.ATLASDB_URL;
 
 main().then(() => {
@@ -12,6 +12,7 @@ main().then(() => {
 
 async function main(){
     await mongoose.connect(MONGO_URL);
+    // await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust"); for local
 }
 
 const initDB = async () => {
