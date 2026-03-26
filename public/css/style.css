@@ -350,3 +350,38 @@ a{
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     opacity: 0.9;
 }
+
+
+/* wishlist icon */
+.listing-card {
+    position: relative;
+}
+
+.listing-card-wrapper {
+    position: relative;  /* ADD THIS */
+}
+
+.wishlist-icon, .remove-wishlist {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+    z-index: 999;
+}
+
+.listing-card-wrapper .listing-link {
+    position: relative;
+    z-index: 1;
+}
+
+.listing-card-wrapper .remove-wishlist {
+    z-index: 9999;
+}
+
+.wishlist-icon.active {
+    color: #ff385c;
+    transform: scale(1.2);
+}
