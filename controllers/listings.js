@@ -59,7 +59,7 @@ module.exports.showListing = async(req, res) => {
 // create route
 module.exports.createListing = async(req, res, next) => {
 
-    // geocoding
+    // // geocoding
     const geoData = await maptiler.geocoding.forward(
         req.body.listing.location,
         { limit: 1 }
