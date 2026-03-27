@@ -1,4 +1,5 @@
 const Listing = require("../models/listing");
+const User = require("../models/user");
 
 const maptiler = require("@maptiler/client");
 maptiler.config.apiKey = process.env.MAP_API_KEY;
@@ -23,10 +24,18 @@ module.exports.index = async (req, res) => {
 
     const allListings = await Listing.find(query);
 
+    let wishlist = [];
+    if (req.user) {
+        const user = await User.findById(req.user._id);
+        wishlist = user.wishlist.map(id => id.toString());
+    }
+
+
     res.render("listings/index.ejs", {
         allListings,
         search: search || "",
-        category: category || ""
+        category: category || "",
+        wishlist
     });
 };
 

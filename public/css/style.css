@@ -370,6 +370,13 @@ a{
     cursor: pointer;
     transition: transform 0.2s ease, color 0.2s ease;
     z-index: 999;
+    opacity: 0.7;
+}
+
+.wishlist-icon:hover, .remove-wishlist:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 1
 }
 
 .listing-card-wrapper .listing-link {
@@ -384,4 +391,5 @@ a{
 .wishlist-icon.active {
     color: #ff385c;
     transform: scale(1.2);
+    opacity: 1;
 }

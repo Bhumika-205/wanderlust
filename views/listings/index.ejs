@@ -86,7 +86,7 @@
             <a href="/listings/<%= listing._id %>" class="listing-link">
                 <div class="card col listing-card">
                 <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
-                <i class="wishlist-icon fa-regular fa-heart" data-id="<%= listing._id %>"></i>
+                <i class="wishlist-icon fa-regular fa-heart <%= wishlist.includes(listing._id.toString()) ? 'fa-solid active' : 'fa-regular' %>" data-id="<%= listing._id %>"></i>
                 <div class="card-img-overlay"></div>
                     <div class="card-body">
                         <p class="card-text">
