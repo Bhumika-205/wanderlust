@@ -99,6 +99,11 @@ app.use((req, res, next) => {
 //     res.send(registeredUser);
 // }) 
 
+// landing page - 
+app.get("/", (req, res) => {
+    res.render("landing.ejs");
+});
+
 // listings - 
 app.use("/listings", listingRouter);
 // Reviews - 
