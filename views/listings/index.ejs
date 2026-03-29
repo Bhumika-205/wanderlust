@@ -1,7 +1,6 @@
 <% layout("/layouts/boilerplate") %>
 
 <% if (allListings.length > 0) { %>
-    
     <div id="filters">
         <a href="/listings?category=trending<%= search ? `&search=${search}` : '' %>">
                 <div class="filter <%= category === 'trending' ? 'active-filter' : '' %>">
@@ -76,30 +75,42 @@
         <div class="tax-toggle">
             <div class="form-check-reverse form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-                <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+                <!-- <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label> -->
+                <label class="form-check-label" for="switchCheckDefault">
+                    <span class="d-none d-lg-inline">Display total after taxes</span>
+                </label>
             </div>
         </div>
     </div>
 
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 ">
+    <div class="row mt-3">
         <% for(let listing of allListings){ %>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            
             <a href="/listings/<%= listing._id %>" class="listing-link">
-                <div class="card col listing-card">
-                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+            <div class="card listing-card">
+                
+                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image">
+
                 <i class="wishlist-icon fa-regular fa-heart <%= wishlist.includes(listing._id.toString()) ? 'fa-solid active' : 'fa-regular' %>" data-id="<%= listing._id %>"></i>
                 <div class="card-img-overlay"></div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <b><%= listing.title %></b> <br>
-                            &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
-                            <i class="tax-info"> &nbsp;&nbsp; +18% GST </i>
-                        </p>
-                    </div>
+
+                <div class="card-body">
+                <p class="card-text">
+                    <b><%= listing.title %></b> <br>
+                    &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+                    <i class="tax-info"> +18% GST </i>
+                </p>
                 </div>
+
+            </div>
             </a>
-            
+
+        </div>
+
         <% } %>
     </div>
+
 <% } else { %>
         <div class="card no-results-card">
             <div class="card-body text-center">
