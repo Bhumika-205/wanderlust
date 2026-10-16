@@ -56,27 +56,51 @@ module.exports.showListing = async(req, res) => {
     res.render("listings/show.ejs", { listing })
 };
 
-// create route
-module.exports.createListing = async(req, res, next) => {
 
-    // // geocoding
-    const geoData = await maptiler.geocoding.forward(
-        req.body.listing.location,
-        { limit: 1 }
-    );
+ // create route
+module.exports.createListing = async (req, res, next) => {
+    try {
+        // Get and validate the location
+        const location = req.body.listing?.location?.trim();
 
-    let url = req.file.path;
-    let filename = req.file.filename;
-    const newListing = new Listing(req.body.listing);
-    newListing.owner = req.user._id;
-    newListing.image = {url, filename};
+        if (!location) {
+            req.flash("error", "Please enter a valid place or address.");
+            return res.redirect("/listings/new");
+        }
 
-    // saving coordinates
-    newListing.geometry = geoData.features[0].geometry;
+        // Geocode the location using MapTiler
+        const geoData = await maptiler.geocoding.forward(
+            location,
+            { limit: 1 }
+        );
 
-    console.log(await newListing.save());
-    req.flash("success", "New Listing Created!")
-    res.redirect("/listings");
+        // Check if MapTiler found a valid result
+        const feature = geoData?.features?.[0];
+
+        if (!feature?.geometry) {
+            req.flash(
+                "error",
+                "We couldn't find that location. Please enter a valid place or address."
+            );
+            return res.redirect("/listings/new");
+        }
+
+        // Create and save the listing
+        const { path: url, filename } = req.file;
+        const newListing = new Listing(req.body.listing);
+
+        newListing.owner = req.user._id;
+        newListing.image = { url, filename };
+        newListing.geometry = feature.geometry;
+
+        await newListing.save();
+
+        req.flash("success", "New Listing Created!");
+        return res.redirect("/listings");
+
+    } catch (err) {
+        next(err);
+    }
 };
 
 // Edit route
